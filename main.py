@@ -6,42 +6,60 @@
 
 def preprocessing(train_data_path, test_data_path):
     contiousAttr = [0, 2, 4, 10, 11, 12]
-    maxList = [90,1484705,16,99999,4356,99]
-    minList = [17,13769,1,0,0,1]
+    maxList = []
+    minList = []
     data = []
+
     with open(train_data_path, encoding="utf-8") as f:
-        datalist = f.read().splitlines()
-    for sample in datalist:
-        attr = sample.split(", ")
-        attr.pop(13)
-        print(attr)
-        flag = True
-        for value in attr:
-            if value == '?':
-                print("this sample is removed")
-                flag = False
-                break
-        if flag: data.append(attr)
+        train_set = f.read().splitlines()
 
-    return discretize_sample(data, contiousAttr,maxList,minList)
+    testArray = [[] for j in range(14)]
+    for dataline in train_set:
+        s = dataline.split(", ")
+        if len(s) == 15:
+            s.pop(13)
+            if "?" not in s:
+                for i in range(14):
+                    if i == 0 or i == 2 or i == 4 or i == 10 or i == 11 or i == 12:
+                        testArray[i].append(int(s[i]))
+                    else:
+                        testArray[i].append(s[i])
+    for i in contiousAttr:
+        maxV = max(testArray[i]) + 1
+        minV = min(testArray[i])
+        maxList.append(maxV)
+        minList.append(minV)
+
+    print(maxList)
+    print(minList)
+    return discretize_sample(testArray, contiousAttr,maxList,minList)
 
 
-def discretize_sample(dataset, con_attr_list, max_list, min_list):
+def discretize_sample(dataset, contiousAttr, maxList, minList):
     discretizedata = []
+    for i in range(6):
+        row = contiousAttr[i]
+        length = len(dataset[row])
+        for j in range(length):
+            newV = discretize_attribute(dataset[row][j], maxList[i], minList[i])
+            dataset[row][j] = str(newV)
+    '''
+    discretizedata.append()
     for sample in dataset:
         for i in range(6):
-            index=con_attr_list[i]
-            new_value = discretize_attribute(sample[index], max_list[i], min_list[i])
+            index = contiousAttr[i]
+            newV= discretize_attribute(sample[index], max_list[i], min_list[i])
             sample[index] = str(new_value)
         discretizedata.append(sample)
+    '''
+    print(dataset)
 
-    return discretizedata
+    return dataset
 
 
 def discretize_attribute(value, max, min):
     gap = (max+1 - min) / 10  # discretize feature into ten categories
     return (int(value) - min) // gap
-
 
 
 # Press the green button in the gutter to run the script.
