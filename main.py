@@ -3,7 +3,21 @@
 # Press Shift+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 
-
+fts = ['age', 'workclass', 'fnlwgt', 'education', 'education-num', 'marital-status', 'occupation', 'relationship', 'race', 'sex', 'capital-gain', 'capital-loss', 'hours-per-week']
+fts_domain = [['0.0', '1.0','2.0', '3.0', '4.0', '5.0', '6.0', '7.0', '8.0', '9.0'],
+            ['Private', 'Self-emp-not-inc', 'Self-emp-inc', 'Federal-gov', 'Local-gov', 'State-gov', 'Without-pay', 'Never-worked'],
+            ['0.0', '1.0','2.0', '3.0', '4.0', '5.0', '6.0', '7.0', '8.0', '9.0'],
+            ['Bachelors', 'Some-college', '11th', 'HS-grad', 'Prof-school', 'Assoc-acdm', 'Assoc-voc', '9th', '7th-8th', '12th', 'Masters', '1st-4th', '10th', 'Doctorate', '5th-6th', 'Preschool'],
+            ['0.0', '1.0','2.0', '3.0', '4.0', '5.0', '6.0', '7.0', '8.0', '9.0'],
+            ['Married-civ-spouse', 'Divorced', 'Never-married', 'Separated', 'Widowed', 'Married-spouse-absent', 'Married-AF-spouse'],
+            ['Tech-support', 'Craft-repair', 'Other-service', 'Sales', 'Exec-managerial', 'Prof-specialty', 'Handlers-cleaners', 'Machine-op-inspct', 'Adm-clerical', 'Farming-fishing', 'Transport-moving', 'Priv-house-serv', 'Protective-serv', 'Armed-Forces'],
+            ['Wife', 'Own-child', 'Husband', 'Not-in-family', 'Other-relative', 'Unmarried'],
+            ['White', 'Asian-Pac-Islander', 'Amer-Indian-Eskimo', 'Other', 'Black'],
+            ['Female', 'Male'],
+            ['0.0', '1.0','2.0', '3.0', '4.0', '5.0', '6.0', '7.0', '8.0', '9.0'],
+            ['0.0', '1.0','2.0', '3.0', '4.0', '5.0', '6.0', '7.0', '8.0', '9.0'],
+            ['0.0', '1.0','2.0', '3.0', '4.0', '5.0', '6.0', '7.0', '8.0', '9.0']]
+            
 def preprocessing(train_data_path, test_data_path):
     contiousAttr = [0, 2, 4, 10, 11, 12]
     maxList = []
